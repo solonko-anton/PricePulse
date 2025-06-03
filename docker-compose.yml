@@ -1,0 +1,16 @@
+volumes:
+  pgdata:
+    local
+
+base: &base-backend
+  build: .
+
+services:
+  backend:
+    <<: *base-backend
+    ports:
+      - 8000:8000
+    restart: unless-stoped
+    volumes:
+      - ./logs
+    command: fastapi dev main.py
