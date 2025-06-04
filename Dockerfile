@@ -1,4 +1,4 @@
-FROM python3.12:silm
+FROM python:3.12-slim
 
 ENV PYTHONDONTBUFFERED=1
 ENV PYTHONDONTWRITEBYTCODE=1
@@ -6,10 +6,18 @@ ENV PYTHONDONTWRITEBYTCODE=1
 WORKDIR /code
 
 RUN apt-get update && \
-    apt-get pip install uv 
+    apt-get install -y curl && \
+    curl -Ls https://astral.sh/uv/install.sh | sh && \
+    apt-get clean
 
-COPY pyproject.toml /code/
+ENV PATH="/root/.local/bin:$PATH"
 
-RUN uv add pyproject.toml
+COPY pyproject.toml uv.lock /code/
+
+RUN uv sync
 
 COPY . .
+
+CMD ["uv", "run", "uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000", "--log-level", "debug"]
+
+
