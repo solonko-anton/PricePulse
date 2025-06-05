@@ -9,10 +9,11 @@ class User(SQLModel, table=True):
     email: str = Field(unique=True, nullable=False)
     hashed_password: str = Field(nullable=False)
     is_active: bool = Field(default=True)
-    created_at: datetime = Field(default_factory=datetime.datetime.now())
-    updated_at: datetime = Field()
+    created_at: datetime.datetime = Field(default_factory=datetime.datetime.now)
+    updated_at: datetime.datetime = Field()
 
     @field_validator("email")
+    @classmethod
     def validate_email(cls, v):
         if "@" not in v:
             raise ValueError("Invalid email adress")
