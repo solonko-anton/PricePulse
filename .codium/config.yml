@@ -1,0 +1,8 @@
+review:
+  enabled: true
+  suggestFixes: true
+  askQuestions: false
+  inlineComments: false
+  languages:
+    - python
+  autoApprove: false
