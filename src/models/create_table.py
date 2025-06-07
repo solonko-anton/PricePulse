@@ -3,10 +3,9 @@ from config.database.db_config import settings_db
 
 engine = create_engine(settings_db, echo=True)
 
-def create_db_and_tables() -> None:
-    SQLModel.metadata.create_all(engine)
+# def create_db_and_tables() -> None:      # without docker
+#     SQLModel.metadata.create_all(engine)
 
-def dbsave(data: list) -> None:
+def get_session():
     with Session(engine) as session:
-        session.add_all(data)
-        session.commit()
+        yield session

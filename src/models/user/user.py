@@ -1,6 +1,6 @@
 import datetime
 from pydantic import field_validator
-from sqlmodel import SQLModel, Session, Field
+from sqlmodel import SQLModel, Field
 
 
 class User(SQLModel, table=True):
