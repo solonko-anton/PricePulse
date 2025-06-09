@@ -1,30 +1,24 @@
 import uvicorn
-from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.routes import get_apps_router
+from src.app_instance import app
 from src.config.project_config import settings
 
 
-def get_application() -> FastAPI:
-    application = FastAPI(
-        title=settings.PROJECT_NAME,
-        debug=settings.DEBUG,
-        version=settings.VERSION,
-    )
+app.title = settings.PROJECT_NAME
+app.debug = settings.DEBUG
+app.version = settings.VERSION
 
-    application.include_router(get_apps_router())
+app.include_router(get_apps_router())
 
-    application.add_middleware(
-        CORSMiddleware,
-        allow_origins=settings.CORS_ALLOWED_ORIGINS,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-    return application
-
-app = get_application()
 
 
 if __name__ == "__main__":

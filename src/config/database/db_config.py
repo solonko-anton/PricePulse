@@ -3,6 +3,8 @@ from typing import Optional
 from pydantic import PostgresDsn
 from pydantic_settings import BaseSettings
 
+from dotenv import load_dotenv
+load_dotenv()
 
 class DBConfig(BaseSettings):
     POSTGRES_USER: str
@@ -19,5 +21,8 @@ class DBConfig(BaseSettings):
             f"{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )
 
+    class Config:
+        env_file = '.env'
+        extra = 'ignore'
 
 settings_db = DBConfig()
