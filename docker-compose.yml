@@ -4,6 +4,8 @@ volumes:
 
 services:
   backend:
+    env_file:
+      - .env
     build: .
     depends_on:
       - postgres
