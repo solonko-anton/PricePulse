@@ -64,7 +64,7 @@ PricePulse helps savvy shoppers and deal-hunters stay ahead of price drops on th
 | Layer               | Technology                  |
 | ------------------- | --------------------------- |
 | **API**             | Python, FastAPI            |
-| **Asynchronous Tasks** | Redis Queue (RQ), RQ Dashboard |
+| **Asynchronous Tasks** | Redis Queue (RQ), Celery |
 | **Web Scraping**    | httpx, BeautifulSoup       |
 | **Database**        | PostgreSQL, SQLModel       |
 | **Cache & Queue**   | Redis                      |
